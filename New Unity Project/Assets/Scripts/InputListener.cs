@@ -44,6 +44,7 @@ public class InputListener : MonoBehaviour
         mobility = Input.GetKeyDown(mobilityKey);
         menu = Input.GetKeyDown(interactKey);
         interact = Input.GetKeyDown(interactKey);
+        primaryAttack = Input.GetKeyDown(primaryAttackKey);
     }
     
 }

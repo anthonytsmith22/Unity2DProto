@@ -2,21 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class BulletController : MonoBehaviour
 {
-    [SerializeField] private float spped = 20f;
-    [SerializeField] Rigidbody2D rb;
-    [SerializeField] GameObject Crosshair;
+    [SerializeField] private float speed = 40f;
+    private Vector3 fireDirection;
+    private float waitTime = 2.5f;
     private void Awake(){
-        if(rb == null){
-            rb = GetComponent<Rigidbody2D>();
-        }
-        if(Crosshair == null){
-            Crosshair = GameObject.Find("Player").transform.GetChild(0).transform.Find("Crosshair").transform.GetChild(0).gameObject;
-        } 
+        
     }
 
     private void Start(){
-        //rb.velocity();
+        StartCoroutine(WaitAndDestroy(waitTime));
+    }
+
+    private void Update(){
+        transform.position += fireDirection * speed * Time.deltaTime;
+    }
+
+    public void SetUp(Vector3 FireDirection){
+        this.fireDirection = FireDirection;
+    }
+
+    private void OnCollisionEnter(Collision other){
+        Destroy(this.gameObject);
+    }
+
+    private IEnumerator WaitAndDestroy(float waitTime){
+        yield return new WaitForSeconds(waitTime);
+        Destroy(this.gameObject);
     }
 }
