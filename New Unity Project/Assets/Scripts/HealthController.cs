@@ -5,30 +5,22 @@ using UnityEngine.UI;
 using TMPro;
 public class HealthController : MonoBehaviour
 {
-    private float DefaultHealth = 100;
+    [SerializeField] private float DefaultHealth = 100;
     [SerializeField] private GameObject Entity; 
-    [SerializeField] private bool IsPlayer = false;
     [SerializeField] private GameObject HealthBar;
+    [SerializeField] private GameObject HealthSlider;
     private Slider healthSlider;
     [SerializeField] TextMeshProUGUI text;
     public float MaxHealth { get; private set; }
     public float CurrentHealth { get; set; }
+    [SerializeField] private Vector3 Offset = new Vector3(0f, 0f, 0f);
 
     private void Awake(){
-        if(MaxHealth == 0){
-            MaxHealth = DefaultHealth;
-        }
+        healthSlider = HealthSlider.GetComponent<Slider>();
+        MaxHealth = DefaultHealth;
         CurrentHealth = MaxHealth;
-        if(IsPlayer && healthSlider == null){
-            healthSlider = GameObject.Find("HealthBar").GetComponent<Slider>();
-        }
         if(text == null){
             Debug.LogError("No HealthBar text component assigned!");
-        }
-        if(HealthBar == null){
-            Debug.LogError("No HealthBar component assigned!");
-        }else{
-            healthSlider = HealthBar.GetComponent<Slider>();
         }
     }
 
@@ -46,6 +38,7 @@ public class HealthController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T)){
             UpdateMaxHealth(20f);
         }
+        healthSlider.transform.position = (Entity.transform.position + Offset);
     }
 
     public void DoDamage(float Damage){
@@ -75,11 +68,15 @@ public class HealthController : MonoBehaviour
     private void SetUpHealthBar(){
         healthSlider.maxValue = MaxHealth;
         healthSlider.value = MaxHealth;
-        AdjustHealthBarString();
+         
+        AdjustHealthBarString(); 
+        
     }
     private void AdjustHealthBar(float change){
         healthSlider.value += change;
+        
         AdjustHealthBarString();
+        
     }
 
     private void AdjustHealthBarString(){
@@ -104,5 +101,6 @@ public class HealthController : MonoBehaviour
         healthSlider.value = CurrentHealth;
         
         AdjustHealthBarString();
+        
     }
 }
