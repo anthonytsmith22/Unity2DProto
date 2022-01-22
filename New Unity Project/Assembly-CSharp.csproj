@@ -83,6 +83,9 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
      <Compile Include="Assets\Scripts\BulletController.cs" />
      <Compile Include="Assets\Scripts\HealthController.cs" />
+     <Compile Include="Assets\Scripts\FabricatorController.cs" />
+     <Compile Include="Assets\Scripts\Interactable.cs" />
+     <Compile Include="Assets\Scripts\PlayerInteractionController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
