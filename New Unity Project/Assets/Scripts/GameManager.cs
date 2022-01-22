@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     #region Singleton
@@ -18,6 +21,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+        DontDestroyOnLoad(this.gameObject);
     }
     #endregion
 
@@ -71,5 +75,9 @@ public class GameManager : MonoBehaviour
         if(vcam != null){
             vcam.m_Lens.OrthographicSize = zoom;
         }
+    }
+
+    public void Restart(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

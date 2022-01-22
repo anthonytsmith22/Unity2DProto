@@ -8,6 +8,7 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private float bulletForce = 20f;
+    [SerializeField] private float bulletSpeed = 30f;
  
     private Rigidbody2D rb;
     private void Awake(){
@@ -43,7 +44,7 @@ public class PlayerCombatController : MonoBehaviour
         BulletController controller = bullet.GetComponent<BulletController>();
         Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), bulletCollider);
-        controller.SetUp(lookDirection);
+        controller.SetUp(lookDirection, bulletForce, true);
 
     }
 }

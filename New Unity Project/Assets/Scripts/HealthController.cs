@@ -50,8 +50,8 @@ public class HealthController : MonoBehaviour
         AdjustHealthBar(-Damage);
         if(CurrentHealth <= 0.0f){
             //Death Logic
-
             Destroy(Entity);
+            GameManager.Instance.Restart();   
         }
     }
 
