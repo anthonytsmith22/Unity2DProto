@@ -25,7 +25,6 @@ public class EnemyHealth : MonoBehaviour
             UpdateHealthBarNormalized(0f);
             OnDeath();
         }else{
-            CurrentHealth -= Damage;
             float normalized = CurrentHealth/MaxHealth;
             UpdateHealthBarNormalized(normalized);
         }

@@ -19,7 +19,7 @@ public class PlayerCombatController : MonoBehaviour
         }
         if(mainCamera == null){
             mainCamera = Camera.main;
-        }
+        } 
         
     }
     private Vector3 mousePosition;
@@ -41,6 +41,8 @@ public class PlayerCombatController : MonoBehaviour
         // Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         // rb.AddForce(FirePoint.right * bulletForce, ForceMode2D.Impulse);
         BulletController controller = bullet.GetComponent<BulletController>();
+        Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
+        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), bulletCollider);
         controller.SetUp(lookDirection);
 
     }

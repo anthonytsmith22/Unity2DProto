@@ -6132,7 +6132,7 @@ Transform:
   - {fileID: 1197418114}
   - {fileID: 1324263002}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1324263001
 GameObject:
@@ -6150,7 +6150,7 @@ GameObject:
   - component: {fileID: 1324263006}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: CollisionEnvironment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8545,7 +8545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd8f7e36f309b94c9a3d47411c12d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FPS: 144
+  FPS: 200
   vsyncState: 0
   zoom: 5
 --- !u!1 &2034656353
@@ -8650,7 +8650,7 @@ PrefabInstance:
     - target: {fileID: 3493266862122169586, guid: 861747c3a00451b409c85d2e9db1d85f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3493266862122169586, guid: 861747c3a00451b409c85d2e9db1d85f,
         type: 3}
