@@ -37,8 +37,8 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EditorBase.cs" />
-     <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EditorGUIx.cs" />
      <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EnumFlagDrawer.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EditorGUIx.cs" />
      <None Include="Assets\AstarPathfindingProject\PackageTools\Editor\PackageToolsEditor.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\GameProject\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -283,14 +283,14 @@
     <Reference Include="unityplastic">
         <HintPath>C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity Project\Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+        <HintPath>C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity Project\Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
     <Reference Include="log4netPlastic">
         <HintPath>C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity Project\Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
         <HintPath>C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity Project\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
-        <HintPath>C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity Project\Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
         <HintPath>C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity Project\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
