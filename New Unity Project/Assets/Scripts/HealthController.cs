@@ -38,7 +38,6 @@ public class HealthController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T)){
             UpdateMaxHealth(20f);
         }
-        healthSlider.transform.position = (Entity.transform.position + Offset);
     }
 
     public void DoDamage(float Damage){
