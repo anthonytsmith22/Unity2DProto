@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float DefaultHealth = 100f;
     public float MaxHealth { get; private set; }
     [SerializeField] private float CurrentHealth;
+    [SerializeField] private int EnergyDropAmount = 1;
     private void Awake(){
         MaxHealth = DefaultHealth;
         CurrentHealth = MaxHealth;
@@ -35,7 +36,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
     private void OnDeath(){
-
+        PlayerInfo.Instance.AddEnergy(EnergyDropAmount);
         Destroy(this.gameObject);
     }
 

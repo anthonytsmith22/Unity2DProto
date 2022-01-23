@@ -31,6 +31,7 @@ public class InputListener : MonoBehaviour
     public float horizonalMouse { get; private set; }
     public float verticalMouse { get; private set; }
     public bool primaryAttack { get; private set; }
+    public bool primaryAttackRelease { get; private set; }
     public bool secondaryAttack { get; private set; }
     public bool mobility { get; private set; }
     public bool menu { get; private set; }
@@ -45,6 +46,7 @@ public class InputListener : MonoBehaviour
         menu = Input.GetKeyDown(interactKey);
         interact = Input.GetKeyDown(interactKey);
         primaryAttack = Input.GetKeyDown(primaryAttackKey);
+        primaryAttackRelease = Input.GetKeyUp(primaryAttackKey);
     }
     
 }

@@ -26,14 +26,21 @@ public class PlayerCombatController : MonoBehaviour
     private Vector3 mousePosition;
     // Direction FirePoint is rotated to
     private Vector3 lookDirection;
+    private bool isPrimaryAttacking = false;
+    [SerializeField] private float shootRate = 0.2f;
     private void Update(){
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = transform.position.z;
         lookDirection = (mousePosition - new Vector3(FirePoint.position.x, FirePoint.position.y, FirePoint.position.z)).normalized;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
         FirePoint.rotation = Quaternion.Euler(0f, 0f, angle);
-        if(InputListener.Instance.primaryAttack){
-            Shoot();
+        if(InputListener.Instance.primaryAttack && !isPrimaryAttacking){
+            InvokeRepeating("Shoot", 0f, shootRate);
+            isPrimaryAttacking = true;
+        }
+        if(InputListener.Instance.primaryAttackRelease){
+            CancelInvoke("Shoot");
+            isPrimaryAttacking = false;
         }
     }
 

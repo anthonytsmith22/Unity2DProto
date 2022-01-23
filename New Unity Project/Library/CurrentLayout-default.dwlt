@@ -119,10 +119,10 @@ MonoBehaviour:
     y: 30
     width: 2491
     height: 1347
-  m_MinSize: {x: 679, y: 471}
-  m_MaxSize: {x: 14001, y: 14021}
+  m_MinSize: {x: 678, y: 471}
+  m_MaxSize: {x: 14000, y: 14021}
   vertical: 0
-  controlID: 375
+  controlID: 9854
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 471}
   m_MaxSize: {x: 10000, y: 14021}
   vertical: 1
-  controlID: 376
+  controlID: 9855
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 377
+  controlID: 9856
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -399,9 +399,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d4460000
-      m_LastClickedID: 18132
-      m_ExpandedIDs: 64fbffffce460000
+      m_SelectedIDs: a0460000
+      m_LastClickedID: 18080
+      m_ExpandedIDs: 94e3fffff2e6ffff38ecffff64fbffffa0460000b4460000ce46000036470000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -462,9 +462,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 8.44582, y: 6.593655, z: -112.75163}
+    m_Target: {x: 28.28363, y: 11.449166, z: -9.78402}
     speed: 2
-    m_Value: {x: 8.44582, y: 6.593655, z: -112.75163}
+    m_Value: {x: 28.28363, y: 11.449166, z: -9.78402}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -515,9 +515,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 8.446238
+    m_Target: 29.595549
     speed: 2
-    m_Value: 8.446238
+    m_Value: 29.595549
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -607,13 +607,13 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity
     Project
@@ -621,8 +621,8 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: dc480000
-    m_LastClickedID: 18652
+    m_SelectedIDs: e0480000
+    m_LastClickedID: 18656
     m_ExpandedIDs: 00000000cc48000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
