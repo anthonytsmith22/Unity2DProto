@@ -99,7 +99,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -228942649
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b66d46d567b830841bc1b4a3d68f30b5, type: 3}
   m_Color: {r: 1, g: 0.6179246, b: 0.6179246, a: 1}
@@ -128,7 +128,9 @@ GameObject:
   - component: {fileID: 2253764869958287547}
   - component: {fileID: 2253764869958287545}
   - component: {fileID: 1960617851975681684}
+  - component: {fileID: 797233598360331344}
   - component: {fileID: 3359558373539942647}
+  - component: {fileID: 8645931833810610070}
   m_Layer: 0
   m_Name: ProtoEnemy
   m_TagString: Enemy
@@ -252,7 +254,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4
 --- !u!114 &2253764869958287547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +289,7 @@ MonoBehaviour:
   Offset: {x: 0, y: 0.5, z: 0}
   DefaultHealth: 100
   CurrentHealth: 0
+  EnergyDropAmount: 1
 --- !u!114 &1960617851975681684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +304,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   speed: 3
+--- !u!114 &797233598360331344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2253764869958287520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc63d8474eaf7764d8e6d70a86ff9c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AgressRange: {fileID: 8645931833810610070}
+  AgressRadius: 7
+  Pathfinding: {fileID: 2253764869958287526}
+  CancelAgressWaitTime: 3
 --- !u!61 &3359558373539942647
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -327,6 +346,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!58 &8645931833810610070
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2253764869958287520}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 7
 --- !u!1001 &7036185173722813678
 PrefabInstance:
   m_ObjectHideFlags: 0

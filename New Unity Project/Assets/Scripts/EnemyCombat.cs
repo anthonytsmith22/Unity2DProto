@@ -67,4 +67,5 @@ public class EnemyCombat : MonoBehaviour
         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), bulletCollider);
         controller.SetUp(fireDirection, bulletSpeed, false);
     }
+
 }
