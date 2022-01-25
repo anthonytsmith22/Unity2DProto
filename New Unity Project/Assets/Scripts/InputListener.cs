@@ -26,16 +26,16 @@ public class InputListener : MonoBehaviour
     private KeyCode interactKey = KeyCode.E;
     private KeyCode menuKey = KeyCode.Escape;
     private KeyCode mobilityKey = KeyCode.LeftShift;
-    public float horizontal { get; private set; }
-    public float vertical { get; private set; }
-    public float horizonalMouse { get; private set; }
-    public float verticalMouse { get; private set; }
-    public bool primaryAttack { get; private set; }
-    public bool primaryAttackRelease { get; private set; }
-    public bool secondaryAttack { get; private set; }
-    public bool mobility { get; private set; }
-    public bool menu { get; private set; }
-    public bool interact { get; private set; }
+    public float horizontal;
+    public float vertical;
+    public float horizonalMouse;
+    public float verticalMouse;
+    public bool primaryAttack;
+    public bool primaryAttackRelease;
+    public bool secondaryAttack;
+    public bool mobility;
+    public bool menu;
+    public bool interact;
 
     private void Update(){
         horizontal = Input.GetAxisRaw("Horizontal");
