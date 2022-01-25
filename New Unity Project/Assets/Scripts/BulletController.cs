@@ -10,7 +10,7 @@ public class BulletController : MonoBehaviour
     private bool isPlayer;
     private Collider2D bullet;
     private Vector3 fireDirection;
-    private float waitTime = 1f;
+    [SerializeField] private float waitTime = 2.5f;
     private void Awake(){
         bullet = GetComponent<Collider2D>();
     }

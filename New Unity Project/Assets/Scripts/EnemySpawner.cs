@@ -24,6 +24,14 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    private void OnEnable(){
+        InvokeRepeating("Spawn", spawnTime, spawnTime);
+    }
+
+    private void OnDisable(){
+        CancelInvoke("Spawn");
+    }
+
     private void OnDestroy(){
         CancelInvoke();
     }

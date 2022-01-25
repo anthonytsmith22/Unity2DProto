@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   Damage: 30
+  waitTime: 2.5
 --- !u!61 &7444739792403777410
 BoxCollider2D:
   m_ObjectHideFlags: 0

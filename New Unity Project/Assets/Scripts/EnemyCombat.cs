@@ -8,7 +8,10 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] private Transform FirePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed = 10f;
-    
+    [SerializeField] private CircleCollider2D attackRange;
+    [SerializeField] private float attackRadius = 4f;
+    [SerializeField] List<Collider2D> Colliders = new List<Collider2D>();
+
     // If enemy is engaged with the player in combat
     private bool Engaged = false;
     // When player leaves enemy engagement radius, it will not immeditately disengage
@@ -22,6 +25,7 @@ public class EnemyCombat : MonoBehaviour
         if(Target == null){
             Target = GameObject.Find("Player").transform.GetChild(0).transform;
         }
+        attackRange.radius = attackRadius;
     }
 
     private void OnTriggerEnter2D(Collider2D other){
@@ -64,7 +68,12 @@ public class EnemyCombat : MonoBehaviour
         // rb.AddForce(FirePoint.right * bulletForce, ForceMode2D.Impulse);
         BulletController controller = bullet.GetComponent<BulletController>();
         Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
-        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), bulletCollider);
+        Physics2D.IgnoreCollision(attackRange, bulletCollider);
+        if(Colliders.Count > 0){
+            foreach(Collider2D collider in Colliders){
+                Physics2D.IgnoreCollision(collider, bulletCollider);
+            }
+        }
         controller.SetUp(fireDirection, bulletSpeed, false);
     }
 

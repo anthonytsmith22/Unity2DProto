@@ -26,10 +26,18 @@ public class GameManager : MonoBehaviour
     #endregion
 
     private void Start(){
+        if(PlayerCamera == null){
+            PlayerCamera = GameObject.Find("PlayerCamera");
+        }
+        if(MainCamera == null){
+            MainCamera = Camera.main;
+        }
+        cmCamera = PlayerCamera.GetComponent<CinemachineVirtualCamera>();
         EnableVSync();
         CapFPS();
         DisableMouseCursor();
-        SetCameraOrthographicSize();
+        SetCameraOrthographicSize(zoom);
+        //SetDefaultCMCameraConfiner();
     }
     [SerializeField] private int FPS;
     private void CapFPS(){
@@ -41,6 +49,11 @@ public class GameManager : MonoBehaviour
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = FPS;
         }
+    }
+
+    private void FixedUpdate(){
+        //AstarPath.active.Scan();
+        
     }
 
     [SerializeField] private VSyncState vsyncState = VSyncState.disabled;
@@ -68,16 +81,29 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] private float zoom = 5;
-    private void SetCameraOrthographicSize(){
-        Camera camera = Camera.main;
-        CinemachineBrain brain = (camera == null) ? null : camera.GetComponent<CinemachineBrain>();
-        CinemachineVirtualCamera vcam = (brain == null) ? null : brain.ActiveVirtualCamera as CinemachineVirtualCamera;
-        if(vcam != null){
-            vcam.m_Lens.OrthographicSize = zoom;
+    [SerializeField] private GameObject PlayerCamera;
+    [SerializeField] private Camera MainCamera;
+    private CinemachineVirtualCamera cmCamera; 
+    public void SetCameraOrthographicSize(float size){
+        Debug.Log("Check Ortho");
+        // Camera camera = Camera.main;
+        // CinemachineBrain brain = (camera == null) ? null : camera.GetComponent<CinemachineBrain>();
+        // CinemachineVirtualCamera vcam = (brain == null) ? null : brain.ActiveVirtualCamera as CinemachineVirtualCamera;
+        if(cmCamera != null){
+            cmCamera.m_Lens.OrthographicSize = size;
+            Debug.Log("Check 2");
         }
     }
 
     public void Restart(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void SetDefaultCMCameraConfiner(){
+        PolygonCollider2D startRoomConfiner = GameObject.Find("StartRoomConfiner").GetComponent<PolygonCollider2D>();
+        CameraConfinerController roomConfinerController = startRoomConfiner.GetComponent<CameraConfinerController>();
+        CinemachineConfiner cinemachineConfiner = GameObject.Find("PlayerCamera").GetComponent<CinemachineConfiner>();
+        cinemachineConfiner.m_BoundingShape2D = startRoomConfiner;
+        SetCameraOrthographicSize(roomConfinerController.OrthoCameraSize);
     }
 }

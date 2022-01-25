@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 public class HealthController : MonoBehaviour
 {
     [SerializeField] private float DefaultHealth = 100;
@@ -38,6 +39,7 @@ public class HealthController : MonoBehaviour
     private void Start(){
         SetUpHealthBar();
         SetUpShieldBar();
+        //OnCombatEnter += CancelShieldRegen;
     }
 
     private void Update(){
@@ -50,6 +52,11 @@ public class HealthController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T)){
             UpdateMaxHealth(20f);
         }
+        if(Input.GetKeyDown(KeyCode.R)){
+            AdjustShieldBar(-10f);
+        }
+        RegenShieldController();
+        RegenHealthController();
     }
 
     public void DoDamage(float Damage){
@@ -65,11 +72,13 @@ public class HealthController : MonoBehaviour
                     CurrentHealth -= remainder;
                 }
                 AdjustHealthBar(-remainder);
-                AdjustShieldBar(1);
+                AdjustShieldBar(0.0f);
+                CancelRegen();
             }else{
                 Debug.Log("Check");
                 // Shield takes all damage
                 AdjustShieldBar(-Damage);
+                CancelRegen();
                 return;
             }
         }else{
@@ -79,6 +88,7 @@ public class HealthController : MonoBehaviour
                 CurrentHealth -= Damage;
             }
             AdjustHealthBar(-Damage);
+            CancelRegen();
         }
         if(CurrentHealth <= 0.0f){
             //Death Logic
@@ -164,11 +174,74 @@ public class HealthController : MonoBehaviour
     }
 
     private void AdjustShieldBar(float change){
-        if(change > 0f){
+        if(change == 0.0f){
             shieldSlider.value = 0;
         }else{
             shieldSlider.value += change;
+            if(shieldSlider.value >= MaxShield){
+                shieldSlider.value = MaxShield;
+            }
         }
         AdjustShieldBarString();
+    }
+    
+
+    [SerializeField] private float ShieldRegenRate = 0.33f; //Time between increments
+    [SerializeField] private float ShieldRegenMagnitude = 1f; //Amount of shield added in increment
+    [SerializeField] private float ShieldRegenDelay = 3f; // Amount of time after taking damage that regen starts
+    private bool isRegening = false;
+    private void RegenShieldController(){
+        // Check if CurrentShield is at MaxValue, if so, check if we are regening, cancel invoke and return
+        // if first check fails, we are below maxShield, need to regen, begin InvokeRepeating
+        if(CurrentShield >= MaxShield){
+            if(!isRegening){
+                return;
+            }
+            CancelInvoke("RegenShield");
+            isRegening = false;
+        }
+        if(!isRegening){
+            InvokeRepeating("RegenShield", ShieldRegenDelay, ShieldRegenRate);
+            isRegening = true;
+        }
+    }
+
+    private void RegenShield(){
+        CurrentShield += ShieldRegenMagnitude;
+        AdjustShieldBar(ShieldRegenMagnitude);
+    }
+
+    private void CancelRegen(){
+        if(isRegening){
+            CancelInvoke("RegenShield");
+            isRegening = false;
+        }
+        if(isRegeningHealth){
+            CancelInvoke("RegenHealth");
+            isRegeningHealth = false;
+        }
+    }
+
+    [SerializeField] private float HealthRegenRate = 0.33f; //Time between increments
+    [SerializeField] private float HealthRegenMagnitude = 1f; //Amount of shield added in increment
+    [SerializeField] private float HealthRegenDelay = 3f; // Amount of time after taking damage that regen starts
+    private bool isRegeningHealth = false;
+    private void RegenHealthController(){
+        if(CurrentHealth >= MaxHealth){
+            if(!isRegeningHealth){
+                return;
+            }
+            CancelInvoke("RegenHealth");
+            isRegeningHealth = false;
+        }
+        if(!isRegeningHealth){
+            InvokeRepeating("RegenHealth", HealthRegenDelay, HealthRegenRate);
+            isRegeningHealth = true;
+        }
+    }
+
+    private void RegenHealth(){
+        CurrentHealth += HealthRegenMagnitude;
+        AdjustHealthBar(ShieldRegenMagnitude);
     }
 }

@@ -6,6 +6,7 @@ using Pathfinding;
 public class AgressPlayer : MonoBehaviour
 {
     [SerializeField] private CircleCollider2D AgressRange;
+    private AIDestinationSetter destinationSetter;
     [SerializeField] private float AgressRadius = 5f;
     [SerializeField] private AIPath Pathfinding;
     [SerializeField] private float CancelAgressWaitTime = 3f;
@@ -15,7 +16,12 @@ public class AgressPlayer : MonoBehaviour
         if(Pathfinding == null){
             Pathfinding = GetComponent<AIPath>();
         }
-        Pathfinding.enabled = false;
+        destinationSetter = GetComponent<AIDestinationSetter>();
+    }
+
+    private void Start(){
+        AgressRange.radius = AgressRadius;
+        destinationSetter.target = null;
     }
 
     private void OnTriggerEnter2D(Collider2D other){
@@ -23,7 +29,7 @@ public class AgressPlayer : MonoBehaviour
             if(CancelAgressIsRunning){
                 StopCoroutine(CancelAgress);
             }
-            Pathfinding.enabled = true;
+            destinationSetter.target = other.gameObject.transform;
         }
     }
 
@@ -36,7 +42,7 @@ public class AgressPlayer : MonoBehaviour
     private IEnumerator CancelAggressRoutine(float waitTime){
         CancelAgressIsRunning = true;
         yield return new WaitForSeconds(CancelAgressWaitTime);
-        Pathfinding.enabled = false;
+        destinationSetter.target = null;
         CancelAgressIsRunning = false;
     }
 }
