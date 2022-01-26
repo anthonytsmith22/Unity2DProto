@@ -23,13 +23,13 @@ public class EnemyAI : MonoBehaviour
         // // Freeze rotation of Z-axis
         // rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         // rb.gravityScale = 0f;
-        TargetSetter = GetComponent<AIDestinationSetter>();
-        if(TargetSetter.target == null){
-            TargetSetter.target = GameObject.Find("Player").transform.GetChild(0).transform;
-        }
     }
 
     private void Start(){
+        TargetSetter = GetComponent<AIDestinationSetter>();
+        if(TargetSetter.target == null){
+            TargetSetter.target = GameObject.Find("Player").transform;
+        }
         //InvokeRepeating("GeneratePath", 0f, 0.5f);
     }
     // private void FixedUpdate(){

@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         SetCameraOrthographicSize(zoom);
         //SetDefaultCMCameraConfiner();
     }
-    [SerializeField] private int FPS;
+    [SerializeField] public int FPS;
     private void CapFPS(){
         // If VSync is disabled we can set a FPS cap
         if(vsyncState == VSyncState.disabled){
@@ -85,13 +85,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera MainCamera;
     private CinemachineVirtualCamera cmCamera; 
     public void SetCameraOrthographicSize(float size){
-        Debug.Log("Check Ortho");
         // Camera camera = Camera.main;
         // CinemachineBrain brain = (camera == null) ? null : camera.GetComponent<CinemachineBrain>();
         // CinemachineVirtualCamera vcam = (brain == null) ? null : brain.ActiveVirtualCamera as CinemachineVirtualCamera;
         if(cmCamera != null){
             cmCamera.m_Lens.OrthographicSize = size;
-            Debug.Log("Check 2");
         }
     }
 

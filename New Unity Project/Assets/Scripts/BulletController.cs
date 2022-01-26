@@ -49,9 +49,7 @@ public class BulletController : MonoBehaviour
         else if(other.gameObject.tag.Equals("CollisionEnvironment") || other.gameObject.layer.Equals("Obstacle")){
             Debug.Log("Check");
             Destroy(this.gameObject);
-        }
-        Destroy(this.gameObject);
-        
+        }        
     }
 
     private IEnumerator WaitAndDestroy(float waitTime){

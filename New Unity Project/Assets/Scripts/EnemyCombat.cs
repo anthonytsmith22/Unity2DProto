@@ -34,8 +34,12 @@ public class EnemyCombat : MonoBehaviour
             if(CancelEngagementRunning){
                 StopCoroutine(CancelEngagement);
                 CancelEngagementRunning = false;
+                Engaged = true;
             }
-            EnterCombat();
+            if(!Engaged){
+                Engaged = true;
+                EnterCombat();
+            }
         }
     }
 
@@ -54,11 +58,9 @@ public class EnemyCombat : MonoBehaviour
     }
 
     private void EnterCombat(){
-        if(Engaged){
-            return;
-        }
-        InvokeRepeating("Combat", 0.5f, 0.8f);
         Engaged = true;
+        InvokeRepeating("Combat", 1.5f, 1.5f);
+        Debug.Log("Check Invoke");
     }
     private void Combat(){
         Vector2 fireDirection = (Target.position - transform.position).normalized;

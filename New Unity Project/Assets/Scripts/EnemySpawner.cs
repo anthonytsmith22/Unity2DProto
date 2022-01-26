@@ -21,18 +21,6 @@ public class EnemySpawner : MonoBehaviour
         GameObject enemy = Instantiate(EnemyPrefab, SpawnPoint.transform.position, EnemyPrefab.transform.rotation);
         BoxCollider2D enemyCollider = enemy.GetComponent<BoxCollider2D>();
         Physics2D.IgnoreCollision(enemyCollider, SpawnerCollider);
-
     }
 
-    private void OnEnable(){
-        InvokeRepeating("Spawn", spawnTime, spawnTime);
-    }
-
-    private void OnDisable(){
-        CancelInvoke("Spawn");
-    }
-
-    private void OnDestroy(){
-        CancelInvoke();
-    }
 }

@@ -8,13 +8,11 @@ public class DisableSpawners : MonoBehaviour
 
     [SerializeField] private bool activate = false;
     
-
     private void Start(){
         if(activate){
             ToggleSpawners();
         }
     }
-
 
     private void ToggleSpawners(){
         int spawners = Spawners.Count;

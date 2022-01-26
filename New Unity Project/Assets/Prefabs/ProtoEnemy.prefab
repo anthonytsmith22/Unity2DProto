@@ -127,10 +127,8 @@ GameObject:
   - component: {fileID: 2253764869958287547}
   - component: {fileID: 2253764869958287545}
   - component: {fileID: 1960617851975681684}
-  - component: {fileID: 8322132491293006195}
   - component: {fileID: 2253764869958287546}
-  - component: {fileID: 3359558373539942647}
-  - component: {fileID: 8503970301237963940}
+  - component: {fileID: 7460863570064628835}
   m_Layer: 9
   m_Name: ProtoEnemy
   m_TagString: Enemy
@@ -257,10 +255,8 @@ MonoBehaviour:
     type: 3}
   bulletSpeed: 10
   attackRange: {fileID: 2253764869958287546}
-  attackRadius: 4
-  Colliders:
-  - {fileID: 8503970301237963940}
-  - {fileID: 3359558373539942647}
+  attackRadius: 5
+  Colliders: []
 --- !u!114 &2253764869958287545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,22 +289,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   speed: 3
---- !u!114 &8322132491293006195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2253764869958287520}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc63d8474eaf7764d8e6d70a86ff9c25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AgressRange: {fileID: 8503970301237963940}
-  AgressRadius: 7
-  Pathfinding: {fileID: 2253764869958287526}
-  CancelAgressWaitTime: 3
 --- !u!58 &2253764869958287546
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -325,7 +305,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
---- !u!61 &3359558373539942647
+--- !u!61 &7460863570064628835
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -351,22 +331,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!58 &8503970301237963940
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2253764869958287520}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 7
 --- !u!1001 &7036185173722813678
 PrefabInstance:
   m_ObjectHideFlags: 0

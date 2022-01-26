@@ -53,7 +53,7 @@ public class HealthController : MonoBehaviour
             UpdateMaxHealth(20f);
         }
         if(Input.GetKeyDown(KeyCode.R)){
-            AdjustShieldBar(-10f);
+            UpdateMaxHealth(400);
         }
         RegenShieldController();
         RegenHealthController();

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Ability : MonoBehaviour
 {
-    private Transform Player;
+    public Transform Player;
+    public AbilityType Type = AbilityType.None;
     public int Charges;
     public int MaxCharges = -1;
     public float CooldownTime = 0f;
     public bool CooldownRunning = false;
     public KeyCode activasionKey;
-    private Coroutine ActiveCooldown;
-    private Queue<IEnumerator> CooldownQueue = new Queue<IEnumerator>();
+    public Coroutine ActiveCooldown;
+    public Queue<IEnumerator> CooldownQueue = new Queue<IEnumerator>();
     public virtual void Start(){
         Player = GetComponent<Transform>();
         Charges = MaxCharges;
@@ -20,11 +21,11 @@ public class Ability : MonoBehaviour
         if(CooldownTime > 0.0f && !CooldownRunning){
             CooldownQueue.Enqueue(ActivateCooldown(CooldownTime));
         }
-
     }
 
     public virtual void Update(){
         if(Input.GetKeyDown(activasionKey)){
+            Debug.Log("Check Ability");
             if(CooldownRunning || Charges == 0){
                 return;
             }
@@ -53,13 +54,22 @@ public class Ability : MonoBehaviour
     }
 
     public void IncreaseMaxCharges(){
-
+        MaxCharges++;
+        CooldownQueue.Enqueue(ActivateCooldown(CooldownTime));
     }
 
     private void QueueCooldowns(){
-        if(CooldownRunning){
+        if(CooldownRunning || CooldownQueue.Count == 0){
             return;
         }
         ActiveCooldown = StartCoroutine(CooldownQueue.Dequeue());
+    }
+
+    public enum AbilityType{
+        Primary,
+        Secondary,
+        Mobility,
+        Tech,
+        None
     }
 }
