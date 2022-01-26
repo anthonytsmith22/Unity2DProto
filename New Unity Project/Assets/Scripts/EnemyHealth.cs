@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     public float MaxHealth { get; private set; }
     [SerializeField] private float CurrentHealth;
     [SerializeField] private int EnergyDropAmount = 1;
+    public bool isEntangled = false;
     private void Awake(){
         MaxHealth = DefaultHealth;
         CurrentHealth = MaxHealth;
@@ -21,6 +23,9 @@ public class EnemyHealth : MonoBehaviour
     }
 
     public void DoDamage(float Damage){
+        if(isEntangled){
+            Entangler.DoDamage(Damage, this);
+        }
         CurrentHealth -= Damage;
         if(CurrentHealth <= 0.0f){
             UpdateHealthBarNormalized(0f);
@@ -35,9 +40,21 @@ public class EnemyHealth : MonoBehaviour
         Bar.transform.localScale = new Vector3(health, 1f);
     }
 
-    private void OnDeath(){
+    public void OnDeath(){
+        if(isEntangled){
+            Entangler.RemoveTarget(this);
+        }
         PlayerInfo.Instance.AddEnergy(EnergyDropAmount);
         Destroy(this.gameObject);
     }
 
+
+    public QuantumEntanglementAbility Entangler;
+    public void TriggerEntangled(QuantumEntanglementAbility entangler){
+        Entangler = entangler;
+    }
+
+    public void ExitEntangled(){
+        Entangler = null;
+    }
 }

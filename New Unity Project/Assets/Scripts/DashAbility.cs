@@ -24,20 +24,20 @@ public class DashAbility : Ability
     public override void Run()
     {
         base.Run();
-        Debug.Log("CheckRun");
         Vector2 movement = new Vector2();
         movement.x = InputListener.Instance.horizontal;
         movement.y = InputListener.Instance.vertical;
         // Debug.Log(movement);
         // playerRB.position += movement.normalized * DashSpeed;
         // Debug.Log("CheckRun2");
-        DashRoutine = StartCoroutine(Dash(movement.normalized));
+        // DashRoutine = StartCoroutine(Dash(movement.normalized));
+        Dash2(movement);
     }
 
     private void OnCollisionEnter2D(Collision2D other){
         if(isDashing){
-            StopCoroutine(DashRoutine);
-            isDashing = false;
+            // StopCoroutine(DashRoutine);
+            // isDashing = false;
         }
     }
 
@@ -54,6 +54,8 @@ public class DashAbility : Ability
         isDashing = false;
     }
 
-
+    private void Dash2(Vector2 Direction){
+        playerRB.AddForce(DashSpeed * Direction.normalized);
+    }
 
 }
