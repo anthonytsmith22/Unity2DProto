@@ -8,11 +8,14 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float speed = 30f;
     [SerializeField] private float Damage = 30f;
     private bool isPlayer;
+    private bool isEntangleActive;
+    private QuantumEntanglementAbility quantumAbility;
     private Collider2D bullet;
     private Vector3 fireDirection;
     [SerializeField] private float waitTime = 2.5f;
     private void Awake(){
         bullet = GetComponent<Collider2D>();
+        quantumAbility = GameObject.Find("Player").transform.GetComponent<QuantumEntanglementAbility>();
     }
 
     private void Start(){
@@ -27,6 +30,7 @@ public class BulletController : MonoBehaviour
         this.fireDirection = FireDirection;
         this.isPlayer = isPlayer;
         this.speed = bulletSpeed;
+        isEntangleActive = quantumAbility.isActive;
     }
 
     private void OnCollisionEnter2D(Collision2D other){
@@ -35,7 +39,12 @@ public class BulletController : MonoBehaviour
         if(isPlayer){
             if(other.gameObject.tag.Equals("Enemy")){
                 EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-                enemyHealth.DoDamage(Damage);
+                if(isEntangleActive){
+                    enemyHealth.DoDamage(Damage, true);
+                }else{
+                    enemyHealth.DoDamage(Damage);
+                }
+                
                 Destroy(this.gameObject);
             }
         }

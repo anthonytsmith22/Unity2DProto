@@ -13,20 +13,27 @@ public class Ability : MonoBehaviour
     public KeyCode activasionKey;
     public Coroutine ActiveCooldown;
     public Queue<IEnumerator> CooldownQueue = new Queue<IEnumerator>();
+    
+    public virtual void Awake(){
+        Player = this.gameObject.GetComponent<Transform>();
+        Charges = MaxCharges;
+    }
+    
     public virtual void Start(){
         Player = GetComponent<Transform>();
         Charges = MaxCharges;
     }
     public virtual void Run(){
-        if(CooldownTime > 0.0f && !CooldownRunning){
+        if(CooldownTime > 0.0f || MaxCharges > 0){
             CooldownQueue.Enqueue(ActivateCooldown(CooldownTime));
+            Charges--;
         }
     }
 
     public virtual void Update(){
         if(Input.GetKeyDown(activasionKey)){
             Debug.Log("Check Ability");
-            if(CooldownRunning || Charges == 0){
+            if(Charges == 0){
                 return;
             }
             Run();

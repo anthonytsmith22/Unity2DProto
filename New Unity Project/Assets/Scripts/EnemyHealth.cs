@@ -22,8 +22,21 @@ public class EnemyHealth : MonoBehaviour
         HealthBar.transform.position = transform.position + Offset;
     }
 
-    public void DoDamage(float Damage){
-        if(isEntangled){
+    public void DoDamage(float Damage)
+    {
+        CurrentHealth -= Damage;
+        if(CurrentHealth <= 0.0f){
+            UpdateHealthBarNormalized(0f);
+            OnDeath();
+        }else{
+            float normalized = CurrentHealth/MaxHealth;
+            UpdateHealthBarNormalized(normalized);
+        }
+    }
+
+    public void DoDamage(float Damage, bool DamageSource){
+        Debug.Log("Check Damage");
+        if(isEntangled && DamageSource){
             Entangler.DoDamage(Damage, this);
         }
         CurrentHealth -= Damage;

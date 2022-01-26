@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class TeleportAbility : Ability
 {
-    public Transform Player;
     public Transform Crosshair;
-    public Camera Camera;
+    
 
-    private void Awake(){
+    public override void Awake(){
+        base.Awake();
         Type = AbilityType.Mobility;
         activasionKey = KeyCode.LeftShift;
-        Charges = 2;
+        CooldownTime = 10f;
+        MaxCharges = 2;
         if(Player == null){
             GameObject.Find("Player").GetComponent<Transform>();
         }
         if(Crosshair == null){
-            Crosshair = Player.Find("Crosshair").GetComponent<Transform>();
-        }
-        if(Camera == null){
-            Camera = Camera.main;
+            Crosshair = Player.Find("Crosshair").transform.GetChild(0).gameObject.GetComponent<Transform>();
         }
     }
 
@@ -29,17 +27,20 @@ public class TeleportAbility : Ability
 
     public override void Run()
     {
-        Vector2 mousePosition = Input.mousePosition;
-        RaycastHit2D hit = Physics2D.Raycast(Camera.transform.position, mousePosition);
-        if(hit.transform.tag.Equals("CollisionEnvironment")){
-            return;
-        }
+        Debug.Log("Check Tele");
+        // Vector2 mousePosition = Input.mousePosition;
+        // RaycastHit2D hit = Physics2D.Raycast(Camera.transform.position, mousePosition);
+        // if(hit.transform.tag.Equals("CollisionEnvironment")){
+        //     //return;
+        // }
+        Vector3 destination = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        destination.z = 0.0f;
         base.Run();
-        Teleport(mousePosition);
+        Teleport(destination);
     }
 
-    private void Teleport(Vector2 TeleportPosition)
+    private void Teleport(Vector3 TeleportPosition)
     {
-        Player.position = TeleportPosition;
+        Player.position += Crosshair.localPosition;
     }
 }
