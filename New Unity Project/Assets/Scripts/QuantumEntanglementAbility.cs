@@ -93,6 +93,9 @@ public class QuantumEntanglementAbility : Ability
     }
 
     public void RemoveTarget(EnemyHealth Enemy){
+        if(PotentialEnemies.Contains(Enemy){
+            PotentialEnemies.Remove(Enemy);
+        }
         if(TargetedEnemies.Contains(Enemy)){
             TargetedEnemies.Remove(Enemy);
             Enemy.isEntangled = false;
