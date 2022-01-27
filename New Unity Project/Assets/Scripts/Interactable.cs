@@ -29,6 +29,7 @@ public class Interactable : MonoBehaviour
         InteractBar.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D other){
+        if(other.isTrigger){ return; }
         if(other.gameObject.tag.Equals("Player")){
             Player = other.gameObject;
             InteractionController = Player.GetComponent<PlayerInteractionController>();
