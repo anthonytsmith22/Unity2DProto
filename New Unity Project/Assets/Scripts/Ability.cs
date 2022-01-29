@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Ability : MonoBehaviour
 {
@@ -25,8 +26,9 @@ public class Ability : MonoBehaviour
     }
     public virtual void Run(){
         if(CooldownTime > 0.0f || MaxCharges > 0){
-            CooldownQueue.Enqueue(ActivateCooldown(CooldownTime));
+            CooldownQueue.Enqueue(ActivateCooldown2(CooldownTime));
             Charges--;
+            ChargeChangeEnter();
         }
     }
 
@@ -46,6 +48,36 @@ public class Ability : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         Charges++;
         CooldownRunning = false;
+    }
+
+    public float CurrentCooldownTime;
+    IEnumerator ActivateCooldown2(float waitTime){
+        CooldownRunning = true;
+        CurrentCooldownTime = waitTime;
+        ChangeCooldownTimeRemaingEnter();
+        while(CurrentCooldownTime > 0.0f){
+            CurrentCooldownTime -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        Charges++;
+        ChargeChangeEnter();
+        CooldownRunning = false;
+        ChangeCooldownTimeRemaingEnter();
+    }
+
+    public event Action OnChangeCooldownTimeRemaingEnter;
+    public void ChangeCooldownTimeRemaingEnter(){
+        if(OnChangeCooldownTimeRemaingEnter != null){
+            OnChangeCooldownTimeRemaingEnter();
+        }
+    }
+
+    public event Action OnChargeChangeEnter;
+    public void ChargeChangeEnter(){
+        if(OnChargeChangeEnter != null){
+            Debug.Log("Check event");
+            OnChargeChangeEnter();
+        }
     }
 
     public void CancelCooldowns(){

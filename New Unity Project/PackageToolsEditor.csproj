@@ -36,9 +36,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EditorGUIx.cs" />
      <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EditorBase.cs" />
      <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EnumFlagDrawer.cs" />
-     <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EditorGUIx.cs" />
      <None Include="Assets\AstarPathfindingProject\PackageTools\Editor\PackageToolsEditor.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\GameProject\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -288,6 +288,9 @@
     </Reference>
     <Reference Include="log4netPlastic">
         <HintPath>C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity Project\Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+        <HintPath>C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity Project\Library\PackageCache\com.unity.render-pipelines.core@10.8.1\Editor\ShaderGenerator\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
         <HintPath>C:\Users\Anthony\Documents\Unity2DProto\Unity2DProto\New Unity Project\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>

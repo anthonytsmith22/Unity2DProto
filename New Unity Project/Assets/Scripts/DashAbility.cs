@@ -8,11 +8,11 @@ public class DashAbility : Ability
     public Rigidbody2D playerRB;
     
     private float DashSpeed = 2f;
-    private void Awake(){
+    public override void Awake(){
+        base.Awake();
         Type = AbilityType.Mobility;
         activasionKey = KeyCode.LeftShift;
         playerRB = GetComponent<Rigidbody2D>();
-        MaxCharges = 3;
         if(movementController == null){
             movementController = GetComponent<PlayerMovement>();
         }

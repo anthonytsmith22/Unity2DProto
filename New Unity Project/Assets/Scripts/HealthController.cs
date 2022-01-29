@@ -9,7 +9,6 @@ public class HealthController : MonoBehaviour
     [SerializeField] private float DefaultHealth = 100;
     [SerializeField] private GameObject Entity; 
     [SerializeField] private GameObject HealthBar;
-    [SerializeField] private GameObject HealthSlider;
     private Slider healthSlider;
     [SerializeField] TextMeshProUGUI text;
     public float MaxHealth { get; private set; }
@@ -20,18 +19,19 @@ public class HealthController : MonoBehaviour
     public float MaxShield { get; private set; }
     public float CurrentShield { get; private set; }
     [SerializeField] private GameObject ShieldBar;
-    [SerializeField] private GameObject ShieldSlider;
     private Slider shieldSlider;
     [SerializeField] private TextMeshProUGUI ShieldText;
 
     private void Awake(){
-        healthSlider = HealthSlider.GetComponent<Slider>();
+        HealthBar = GameObject.Find("UI").transform.Find("Canvas").transform.Find("HealthBar").gameObject;
+        ShieldBar = GameObject.Find("UI").transform.Find("Canvas").transform.Find("ShieldBar").gameObject;
+        healthSlider = HealthBar.GetComponent<Slider>();
         MaxHealth = DefaultHealth;
         CurrentHealth = MaxHealth;
         if(text == null){
             Debug.LogError("No HealthBar text component assigned!");
         }
-        shieldSlider = ShieldSlider.GetComponent<Slider>();
+        shieldSlider = ShieldBar.GetComponent<Slider>();
         MaxShield = DefaultShield;
         CurrentShield = MaxShield;
     }

@@ -15,8 +15,6 @@ public class QuantumEntanglementAbility : Ability
     public float Duration = 10f; // 10 Seconds
     public override void Awake(){
         base.Awake();
-        MaxCharges = 1;
-        CooldownTime = 10f;
         TriggerArea = GetComponent<CircleCollider2D>();
         Type = AbilityType.Tech;
         activasionKey = KeyCode.Q;
