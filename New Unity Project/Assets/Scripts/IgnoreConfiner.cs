@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[ExecuteInEditMode]
 public class IgnoreConfiner : MonoBehaviour
 {
     public PolygonCollider2D MainCollider;
@@ -13,11 +13,13 @@ public class IgnoreConfiner : MonoBehaviour
     private void Awake(){
         MainCollider = GetComponent<PolygonCollider2D>();
         compositeColider = GetComponent<CompositeCollider2D>();
-        mainCamera = Camera.main;
-        cameraCollider = mainCamera.GetComponent<Collider>();
-    }
-
-    private void Start(){
         
     }
+    public bool run;
+ 
+     void Start() {
+         run = false;
+     }
+ 
+     
 }

@@ -4,31 +4,36 @@ using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour
 {
-    [SerializeField] private Transform Target;
-    [SerializeField] private Transform FirePoint;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float bulletSpeed = 10f;
-    [SerializeField] private CircleCollider2D attackRange;
-    [SerializeField] private float attackRadius = 4f;
-    [SerializeField] List<Collider2D> Colliders = new List<Collider2D>();
+    public Transform Target;
+    public Transform FirePoint;
+    public GameObject bulletPrefab;
+    public float bulletSpeed = 10f;
+    public CircleCollider2D attackRange;
+    public float attackRadius = 4f;
+    public List<Collider2D> Colliders = new List<Collider2D>();
 
     // If enemy is engaged with the player in combat
-    private bool Engaged = false;
+    public bool Engaged = false;
     // When player leaves enemy engagement radius, it will not immeditately disengage
     // Will wait EngagedExitTime before disengaging if the player does not enter
     // engagement radius
-    private float EngagedExitTime = 3f;
-    private Coroutine CancelEngagement;
-    private bool CancelEngagementRunning = false;
+    public float EngagedExitTime = 3f;
+    public float EngagementEnterTime = 1.5f;
+    public float AttackRate = 1.5f;
+    public Coroutine CancelEngagement;
+    public bool CancelEngagementRunning = false;
 
-    private void Start(){
+    public virtual void Awake(){
+
+    }
+    public virtual void Start(){
         if(Target == null){
-            Target = GameObject.Find("Player").transform.GetChild(0).transform;
+            Target = GameObject.Find("Player").transform;
         }
         attackRange.radius = attackRadius;
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
+    public virtual void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag.Equals("Player")){
             // If enemy is disengaging, cancel
             if(CancelEngagementRunning){
@@ -43,26 +48,25 @@ public class EnemyCombat : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other){
+    public virtual void OnTriggerExit2D(Collider2D other){
         if(other.gameObject.tag.Equals("Player")){
             CancelEngagement = StartCoroutine(Disengage(EngagedExitTime));
         }
     }
 
-    IEnumerator Disengage(float waitTime){
+    public virtual IEnumerator Disengage(float waitTime){
         CancelEngagementRunning = true;
         yield return new WaitForSeconds(waitTime);
         Engaged = false;
-        CancelInvoke("Combat");
+        CancelInvoke();
         CancelEngagementRunning = false;
     }
 
-    private void EnterCombat(){
+    public virtual void EnterCombat(){
         Engaged = true;
-        InvokeRepeating("Combat", 1.5f, 1.5f);
-        Debug.Log("Check Invoke");
+        InvokeRepeating("Combat", EngagementEnterTime, AttackRate);
     }
-    private void Combat(){
+    public virtual void Combat(){
         Vector2 fireDirection = (Target.position - transform.position).normalized;
 
         GameObject bullet = Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);

@@ -14,10 +14,10 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - Obstacle
-  - Enemy
+  - Player
   - Floor
+  - Enemy
+  - Obstacle
   - Walls
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
     locked: 0
   - name: Environment
     uniqueID: 2241043911
+    locked: 0
+  - name: Walls
+    uniqueID: 725935441
     locked: 0
   - name: Interactable
     uniqueID: 1121065513

@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpotLight: {fileID: 0}
-  MinIntensity: 0.15
-  MaxIntensity: 0.5
+  MinIntensity: 0.1
+  MaxIntensity: 0.35
   FlashInterval: 2
   CurrentIntensity: 0
   IntensityChangeRate: 0

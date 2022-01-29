@@ -45,6 +45,10 @@ public class AbilityUIController : MonoBehaviour
         AbilityController.OnChargeChangeEnter += UpdateChargeText;
         AbilityController.OnChangeCooldownTimeRemaingEnter += ToggleEnableUpdate;
     }
+
+    private void Start(){
+        UpdateChargeText();
+    }
     private StringBuilder ChargesSB = new StringBuilder();
     private int Charges;
     public void UpdateChargeText(){
