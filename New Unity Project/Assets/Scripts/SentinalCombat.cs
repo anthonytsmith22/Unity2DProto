@@ -69,6 +69,13 @@ public class SentinalCombat : EnemyCombat
         while(currentChargeTime > 0.0f){
             targetLocation = Target.position;
             activeFireLocation = Vector2.Lerp(activeFireLocation, targetLocation, Time.deltaTime*10);
+            // RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, activeFireLocation);
+            // ChargeRenderer.SetPosition(0, FirePoint.position);
+            // if(hit.transform.tag.Equals("CollisionEnvironment")){
+            //     ChargeRenderer.SetPosition(1, hit.point);
+            // }else{
+            //     ChargeRenderer.SetPosition(1, activeFireLocation);
+            // }
             ChargeRenderer.SetPosition(0, FirePoint.position);
             ChargeRenderer.SetPosition(1, activeFireLocation);
             currentChargeTime -= Time.deltaTime;
@@ -83,6 +90,15 @@ public class SentinalCombat : EnemyCombat
             ChargeRenderer.enabled = false;
             targetLocation = Target.position;
             activeFireLocation = Vector2.Lerp(activeFireLocation, targetLocation, Time.deltaTime*10);
+            // RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, activeFireLocation);
+            // Debug.Log(hit.);
+            // FireRenderer.SetPosition(0, FirePoint.position);
+            // if(hit.transform.tag.Equals("CollisionEnvironment")){
+            //     Debug.Log("check hit");
+            //     FireRenderer.SetPosition(1, hit.transform.position);
+            // }else{
+            //     FireRenderer.SetPosition(1, activeFireLocation);
+            // }
             FireRenderer.SetPosition(0, FirePoint.position);
             FireRenderer.SetPosition(1, activeFireLocation);
             currentFireTime -= Time.deltaTime;
