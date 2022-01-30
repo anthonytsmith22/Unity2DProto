@@ -77,7 +77,7 @@ MonoBehaviour:
   HealthBar: {fileID: 8158765068139688392}
   Bar: {fileID: 8158765068429340540}
   Offset: {x: 0, y: 0, z: 0}
-  DefaultHealth: 100
+  DefaultHealth: 125
   CurrentHealth: 0
   EnergyDropAmount: 1
   isEntangled: 0

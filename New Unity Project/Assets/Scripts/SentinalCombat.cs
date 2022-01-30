@@ -10,8 +10,16 @@ public class SentinalCombat : EnemyCombat
     public float FireTime = 3f;
     public LineRenderer FireRenderer;
     public LineRenderer ChargeRenderer;
-
+    private CircleCollider2D ImpactCollider;
+    [SerializeField] private float ImpactRadius = 1f;
     public override void Awake(){
+        // Create circle collider that will damage enemy
+        // Is attached to end of FireLine
+        ImpactCollider = gameObject.AddComponent<CircleCollider2D>();
+        ImpactCollider.radius = ImpactRadius;
+        ImpactCollider.isTrigger = true;
+        ImpactCollider.enabled = false;
+
         FireRenderer = Instantiate(FireRenderer);
         ChargeRenderer = Instantiate(ChargeRenderer);
         ChargeRenderer.enabled = false;
@@ -45,7 +53,8 @@ public class SentinalCombat : EnemyCombat
     public Vector2 activeFireLocation;
     private void Shoot(){
         Debug.Log("Shooting");
-        RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, activeFireLocation);
+        RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, FireRenderer.GetPosition(1));
+        Debug.DrawLine(FirePoint.position, activeFireLocation, Color.green);
         if(hit.transform.tag.Equals("Player")){
             HealthController player = hit.transform.GetComponent<HealthController>();
             player.DoDamage(damagePerTick);
@@ -89,7 +98,7 @@ public class SentinalCombat : EnemyCombat
         while(currentFireTime > 0.0f){
             ChargeRenderer.enabled = false;
             targetLocation = Target.position;
-            activeFireLocation = Vector2.Lerp(activeFireLocation, targetLocation, Time.deltaTime*10);
+            activeFireLocation = Vector2.Lerp(activeFireLocation, targetLocation, Time.deltaTime);
             // RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, activeFireLocation);
             // Debug.Log(hit.);
             // FireRenderer.SetPosition(0, FirePoint.position);

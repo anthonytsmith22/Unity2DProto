@@ -175,7 +175,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   bulletSpeed: 10
   attackRange: {fileID: 6335534631843092074}
-  attackRadius: 5
+  attackRadius: 4
   Colliders: []
   Engaged: 0
   EngagedExitTime: 3
@@ -353,7 +353,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1160501941
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 89321a4f274f11f4489896a2f1b6e566, type: 3}
   m_Color: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
@@ -435,8 +435,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -228942649
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayer: 4
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: b278bb913228fae48937a93b0f1e0efb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -517,7 +517,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1160501941
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 89321a4f274f11f4489896a2f1b6e566, type: 3}
   m_Color: {r: 0.7264151, g: 0, b: 0, a: 1}
