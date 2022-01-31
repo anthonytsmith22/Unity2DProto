@@ -5,19 +5,17 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 5f;
-    public Rigidbody2D rb;
-    
+    public Transform player;
     private void Awake(){
-        rb = GetComponent<Rigidbody2D>();
+        player = GetComponent<Transform>();
     }
 
     public Vector2 movement;
     private void Update(){
         movement.x = InputListener.Instance.horizontal;
         movement.y = InputListener.Instance.vertical;
-    }
-
-    private void FixedUpdate(){
-        rb.MovePosition(rb.position + movement * movementSpeed * Time.fixedDeltaTime);
+        Vector2 playerPosition = player.position;
+        playerPosition += movement * movementSpeed * Time.deltaTime;
+        player.position = playerPosition;
     }
 }

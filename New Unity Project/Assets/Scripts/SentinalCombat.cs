@@ -10,17 +10,14 @@ public class SentinalCombat : EnemyCombat
     public float FireTime = 3f;
     public LineRenderer FireRenderer;
     public LineRenderer ChargeRenderer;
-    private CircleCollider2D ImpactCollider;
-    [SerializeField] private float ImpactRadius = 1f;
-    public override void Awake(){
-        // Create circle collider that will damage enemy
-        // Is attached to end of FireLine
-        ImpactCollider = gameObject.AddComponent<CircleCollider2D>();
-        ImpactCollider.radius = ImpactRadius;
-        ImpactCollider.isTrigger = true;
-        ImpactCollider.enabled = false;
+    
+    [SerializeField] private GameObject AttackPoint;
+    private SentinalFire FireController;
+    [SerializeField] private float ImpactRadius = 0.2f;
 
-        FireRenderer = Instantiate(FireRenderer);
+    public override void Awake(){
+        FireController = AttackPoint.GetComponent<SentinalFire>();
+        FireRenderer = Instantiate(FireRenderer, FirePoint.position, Quaternion.identity, transform);
         ChargeRenderer = Instantiate(ChargeRenderer);
         ChargeRenderer.enabled = false;
         FireRenderer.enabled = false;
@@ -40,6 +37,7 @@ public class SentinalCombat : EnemyCombat
                 CancelEngagementRunning = false;
             }
         }
+        
     }
 
     public override void OnTriggerExit2D(Collider2D other)
@@ -51,16 +49,6 @@ public class SentinalCombat : EnemyCombat
 
     public Vector2 targetLocation;
     public Vector2 activeFireLocation;
-    private void Shoot(){
-        Debug.Log("Shooting");
-        RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, FireRenderer.GetPosition(1));
-        Debug.DrawLine(FirePoint.position, activeFireLocation, Color.green);
-        if(hit.transform.tag.Equals("Player")){
-            HealthController player = hit.transform.GetComponent<HealthController>();
-            player.DoDamage(damagePerTick);
-        }
-        ChargeRenderer.enabled = true;
-    }
 
     private void Update(){
         if(Engaged && !isFireRunning){
@@ -94,7 +82,7 @@ public class SentinalCombat : EnemyCombat
         ChargeRenderer.enabled = false;
         FireRenderer.enabled = true;
         float currentFireTime = FireTime;
-        InvokeRepeating("Shoot", 0.0f, tickTime);
+        FireController.Activate(damagePerTick, tickTime, ImpactRadius);
         while(currentFireTime > 0.0f){
             ChargeRenderer.enabled = false;
             targetLocation = Target.position;
@@ -110,17 +98,18 @@ public class SentinalCombat : EnemyCombat
             // }
             FireRenderer.SetPosition(0, FirePoint.position);
             FireRenderer.SetPosition(1, activeFireLocation);
+            FireController.SetPosition(activeFireLocation);
             currentFireTime -= Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        CancelInvoke("Shoot");
+        FireController.Deactivate();
         FireRenderer.enabled = false;
         isFireRunning = false;
     }
 
     private void OnDestroy(){
-        Destroy(ChargeRenderer);
-        Destroy(FireRenderer);
+        Destroy(ChargeRenderer.gameObject);
+        Destroy(FireRenderer.gameObject);
 
     }
     

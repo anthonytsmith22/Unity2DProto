@@ -49,6 +49,9 @@ public class BulletController : MonoBehaviour
             }
         }
         else if(!isPlayer){
+            if(other.gameObject.tag.Equals("Enemy")){
+                return;
+            }
             if(other.gameObject.tag.Equals("Player")){
                 HealthController playerHealth = other.gameObject.GetComponent<HealthController>();
                 playerHealth.DoDamage(Damage);
@@ -59,6 +62,7 @@ public class BulletController : MonoBehaviour
             Debug.Log("Check");
             Destroy(this.gameObject);
         }        
+        Destroy(this.gameObject);
     }
 
     private IEnumerator WaitAndDestroy(float waitTime){
