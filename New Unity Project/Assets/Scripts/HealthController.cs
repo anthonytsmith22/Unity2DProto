@@ -207,7 +207,7 @@ public class HealthController : MonoBehaviour
     }
 
     private void RegenShield(){
-        CurrentShield += ShieldRegenMagnitude;
+        CurrentShield += ShieldRegenMagnitude * MaxShield;
         AdjustShieldBar(ShieldRegenMagnitude);
     }
 
@@ -224,7 +224,7 @@ public class HealthController : MonoBehaviour
 
     [SerializeField] private float HealthRegenRate = 0.33f; //Time between increments
     [SerializeField] private float HealthRegenMagnitude = 1f; //Amount of shield added in increment
-    [SerializeField] private float HealthRegenDelay = 3f; // Amount of time after taking damage that regen starts
+    [SerializeField] private float HealthRegenDelay = 5f; // Amount of time after taking damage that regen starts
     private bool isRegeningHealth = false;
     private void RegenHealthController(){
         if(CurrentHealth >= MaxHealth){
@@ -241,7 +241,7 @@ public class HealthController : MonoBehaviour
     }
 
     private void RegenHealth(){
-        CurrentHealth += HealthRegenMagnitude;
+        CurrentHealth += HealthRegenMagnitude * MaxHealth;
         AdjustHealthBar(ShieldRegenMagnitude);
     }
 }

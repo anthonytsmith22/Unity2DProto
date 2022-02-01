@@ -18,7 +18,7 @@ public class SentinalCombat : EnemyCombat
     public override void Awake(){
         FireController = AttackPoint.GetComponent<SentinalFire>();
         FireRenderer = Instantiate(FireRenderer, FirePoint.position, Quaternion.identity, transform);
-        ChargeRenderer = Instantiate(ChargeRenderer);
+        ChargeRenderer = Instantiate(ChargeRenderer, FirePoint.position, Quaternion.identity, transform);
         ChargeRenderer.enabled = false;
         FireRenderer.enabled = false;
     }
@@ -37,7 +37,6 @@ public class SentinalCombat : EnemyCombat
                 CancelEngagementRunning = false;
             }
         }
-        
     }
 
     public override void OnTriggerExit2D(Collider2D other)

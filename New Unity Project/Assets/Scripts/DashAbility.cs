@@ -6,7 +6,6 @@ public class DashAbility : Ability
 {
     public PlayerMovement movementController;
     public Rigidbody2D playerRB;
-    
     private float DashSpeed = 2f;
     public override void Awake(){
         base.Awake();
@@ -28,18 +27,15 @@ public class DashAbility : Ability
         Vector2 movement = new Vector2();
         movement.x = InputListener.Instance.horizontal;
         movement.y = InputListener.Instance.vertical;
-        Debug.Log(movement);
-        playerRB.position += movement.normalized * DashSpeed;
-        Debug.Log("CheckRun2");
-        DashRoutine = StartCoroutine(Dash(movement.normalized));
-        //Dash2(movement);
+        DashRoutine = StartCoroutine(Dash3(movement.normalized));
     }
 
     private void OnCollisionEnter2D(Collision2D other){
-        if(isDashing){
-            StopCoroutine(DashRoutine);
-            isDashing = false;
-        }
+        isColliding = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D other){
+        isColliding = false;
     }
 
     private Coroutine DashRoutine;
@@ -57,6 +53,29 @@ public class DashAbility : Ability
 
     private void Dash2(Vector2 Direction){
         playerRB.AddForce(DashSpeed * Direction.normalized);
+    }
+
+
+    private float dashTime = 0.25f;
+    private bool isColliding = false;
+    private IEnumerator Dash3(Vector2 Direction){
+        isDashing = true;
+        float currentDashTime = dashTime;
+        Vector2 currentPosition = Player.position;
+        while(currentDashTime < 0.0f){
+            if(isColliding){
+                Player.position = currentPosition;
+                isDashing = false;
+                StopCoroutine(DashRoutine);
+                yield return new WaitForEndOfFrame();
+            }
+            currentDashTime -= Time.deltaTime;
+            currentPosition = Player.position;
+            Vector2 newPosition = currentPosition + Direction * DashSpeed * Time.deltaTime;
+            Player.position = newPosition;;
+            yield return new WaitForEndOfFrame();
+        }
+        isDashing = false;
     }
 
 }
